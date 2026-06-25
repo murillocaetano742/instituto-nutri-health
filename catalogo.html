@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto Nutri-Health — Catálogo Informativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ===================================================
+       VARIÁVEIS E RESET
+    =================================================== */
+    :root {
+      --verde:        #1a5c3a;
+      --verde-claro:  #237a4e;
+      --verde-suave:  #eaf4ee;
+      --dourado:      #b8882a;
+      --dourado-claro:#f0c040;
+      --cinza-escuro: #1a1a1a;
+      --cinza-medio:  #4a4a4a;
+      --cinza-claro:  #888;
+      --cinza-bg:     #f4f4f4;
+      --branco:       #ffffff;
+      --vermelho:     #c0392b;
+      --borda:        #d8d8d8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #e8e8e8;
+      color: var(--cinza-escuro);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ===================================================
+       PÁGINA A4
+    =================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--branco);
+      margin: 0 auto 12px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    /* Conteúdo interno com margens seguras */
+    .page-inner {
+      padding: 14mm 18mm 14mm 18mm;
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cabeçalho de página (exceto capa) */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 6mm;
+      border-bottom: 1px solid var(--borda);
+      margin-bottom: 10mm;
+    }
+
+    .ph-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 10pt;
+      color: var(--verde);
+      letter-spacing: 0.5px;
+    }
+
+    .ph-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: var(--cinza-claro);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Rodapé de página */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 6mm;
+      border-top: 1px solid var(--borda);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pf-text {
+      font-size: 7pt;
+      color: var(--cinza-claro);
+    }
+
+    .pf-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--verde);
+    }
+
+    /* ===================================================
+       CAPA — PÁGINA 1
+    =================================================== */
+    .capa {
+      background: var(--verde);
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .capa-topo {
+      background: rgba(0,0,0,0.25);
+      padding: 8mm 18mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .capa-logo-nome {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13pt;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .capa-logo-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7pt;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .capa-ano {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8pt;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .capa-body {
+      flex: 1;
+      padding: 16mm 18mm 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .capa-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.85);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 3mm 6mm;
+      border-radius: 20px;
+      margin-bottom: 8mm;
+      width: fit-content;
+    }
+
+    .capa h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 32pt;
+      line-height: 1.15;
+      color: #fff;
+      max-width: 160mm;
+      margin-bottom: 6mm;
+    }
+
+    .capa h1 em {
+      font-style: normal;
+      color: var(--dourado-claro);
+    }
+
+    .capa-sub {
+      font-size: 11pt;
+      color: rgba(255,255,255,0.8);
+      max-width: 140mm;
+      line-height: 1.7;
+      margin-bottom: 10mm;
+    }
+
+    .capa-linha {
+      width: 18mm;
+      height: 3px;
+      background: var(--dourado-claro);
+      border-radius: 2px;
+      margin-bottom: 10mm;
+    }
+
+    .capa-stats {
+      display: flex;
+      gap: 8mm;
+      flex-wrap: wrap;
+      margin-bottom: 12mm;
+    }
+
+    .capa-stat {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 4mm 7mm;
+      text-align: center;
+    }
+
+    .cs-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 16pt;
+      color: var(--dourado-claro);
+      line-height: 1;
+    }
+
+    .cs-label {
+      font-size: 7pt;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .capa-rodape {
+      background: rgba(0,0,0,0.3);
+      padding: 5mm 18mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .capa-rodape-txt {
+      font-size: 7.5pt;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .capa-rodape-numero {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===================================================
+       TÍTULOS INTERNOS
+    =================================================== */
+    .section-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 7pt;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--verde);
+      border-left: 3px solid var(--verde);
+      padding-left: 3mm;
+      margin-bottom: 3mm;
+    }
+
+    h2.titulo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 22pt;
+      line-height: 1.2;
+      color: var(--cinza-escuro);
+      margin-bottom: 4mm;
+    }
+
+    h2.titulo .verde  { color: var(--verde); }
+    h2.titulo .dourado { color: var(--dourado); }
+    h2.titulo .vermelho { color: var(--vermelho); }
+
+    .divider {
+      width: 12mm;
+      height: 3px;
+      background: var(--verde);
+      border-radius: 2px;
+      margin-bottom: 6mm;
+    }
+
+    .texto-corpo {
+      font-size: 10pt;
+      color: var(--cinza-medio);
+      line-height: 1.75;
+    }
+
+    /* ===================================================
+       CARDS DE DOR
+    =================================================== */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4mm;
+      margin-top: 6mm;
+    }
+
+    .pain-card {
+      background: #fdf5f5;
+      border: 1px solid #f0d5d5;
+      border-top: 3px solid var(--vermelho);
+      border-radius: 6px;
+      padding: 4mm 4.5mm;
+    }
+
+    .pain-card .ico { font-size: 16pt; margin-bottom: 2mm; }
+
+    .pain-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 8.5pt;
+      color: var(--vermelho);
+      margin-bottom: 2mm;
+    }
+
+    .pain-card p {
+      font-size: 8pt;
+      color: var(--cinza-medio);
+      line-height: 1.6;
+    }
+
+    /* ===================================================
+       CAIXA DE DESTAQUE
+    =================================================== */
+    .box-verde {
+      background: var(--verde-suave);
+      border: 1px solid #b3d9c2;
+      border-left: 4px solid var(--verde);
+      border-radius: 8px;
+      padding: 5mm 6mm;
+      margin: 5mm 0;
+    }
+
+    .box-verde p {
+      font-size: 10pt;
+      color: var(--cinza-escuro);
+      line-height: 1.75;
+    }
+
+    .box-verde p strong { color: var(--verde); }
+
+    .box-cinza {
+      background: var(--cinza-bg);
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+      padding: 5mm 6mm;
+      margin: 5mm 0;
+    }
+
+    /* ===================================================
+       LISTA DE FATOS
+    =================================================== */
+    .fact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3mm;
+    }
+
+    .fact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 3mm;
+      font-size: 9.5pt;
+      color: var(--cinza-medio);
+      line-height: 1.6;
+    }
+
+    .fact-list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 5mm;
+      height: 5mm;
+      background: var(--verde);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7pt;
+      font-weight: 900;
+      color: #fff;
+      margin-top: 1px;
+    }
+
+    /* ===================================================
+       NÚMERO GIGANTE
+    =================================================== */
+    .mega-stat-box {
+      background: var(--verde);
+      border-radius: 12px;
+      padding: 10mm;
+      text-align: center;
+      margin: 6mm 0;
+    }
+
+    .mega-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 52pt;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .mega-num span { color: var(--dourado-claro); }
+
+    .mega-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 11pt;
+      color: rgba(255,255,255,0.85);
+      margin-top: 3mm;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .mega-sub {
+      font-size: 8pt;
+      color: rgba(255,255,255,0.55);
+      margin-top: 2mm;
+    }
+
+    /* ===================================================
+       PILARES
+    =================================================== */
+    .pilares-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin-top: 5mm;
+    }
+
+    .pilar-card {
+      border: 1px solid var(--borda);
+      border-bottom: 3px solid var(--verde);
+      border-radius: 8px;
+      padding: 5mm;
+    }
+
+    .pilar-ico { font-size: 16pt; margin-bottom: 2mm; }
+
+    .pilar-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 9pt;
+      color: var(--verde);
+      text-transform: uppercase;
+      margin-bottom: 2mm;
+    }
+
+    .pilar-card p {
+      font-size: 8.5pt;
+      color: var(--cinza-medio);
+      line-height: 1.65;
+    }
+
+    /* ===================================================
+       ESTATÍSTICAS EM LINHA
+    =================================================== */
+    .stats-row {
+      display: flex;
+      gap: 4mm;
+      flex-wrap: wrap;
+      margin: 5mm 0;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 30mm;
+      background: var(--verde-suave);
+      border: 1px solid #b3d9c2;
+      border-radius: 8px;
+      padding: 4mm 5mm;
+      text-align: center;
+    }
+
+    .si-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 18pt;
+      color: var(--verde);
+      line-height: 1;
+    }
+
+    .si-label {
+      font-size: 7.5pt;
+      color: var(--cinza-claro);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* ===================================================
+       DEPOIMENTOS
+    =================================================== */
+    .dep-card {
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 5mm 5.5mm;
+      position: relative;
+      background: #fff;
+    }
+
+    .dep-card::before {
+      content: '"';
+      position: absolute;
+      top: 2mm;
+      left: 4mm;
+      font-size: 28pt;
+      color: var(--verde);
+      opacity: 0.15;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .dep-stars {
+      color: #e6ac00;
+      font-size: 10pt;
+      letter-spacing: 1px;
+      margin-bottom: 2.5mm;
+    }
+
+    .dep-texto {
+      font-size: 9pt;
+      color: var(--cinza-medio);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 4mm;
+    }
+
+    .dep-autor {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      padding-top: 3mm;
+      border-top: 1px solid var(--borda);
+    }
+
+    .dep-avatar {
+      width: 9mm;
+      height: 9mm;
+      border-radius: 50%;
+      background: var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 9pt;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .dep-nome {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 8.5pt;
+      color: var(--cinza-escuro);
+    }
+
+    .dep-detalhe {
+      font-size: 7.5pt;
+      color: var(--cinza-claro);
+      margin-top: 1px;
+    }
+
+    .dep-verificado {
+      margin-left: auto;
+      font-size: 7pt;
+      color: var(--verde);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .deps-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin-top: 4mm;
+    }
+
+    .deps-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4mm;
+      margin-top: 4mm;
+    }
+
+    /* ===================================================
+       OBJEÇÕES
+    =================================================== */
+    .obj-item {
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+      margin-bottom: 3mm;
+      overflow: hidden;
+    }
+
+    .obj-q {
+      background: #fdf5f5;
+      padding: 3mm 4mm;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 8.5pt;
+      color: var(--vermelho);
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+    }
+
+    .obj-q::before {
+      content: '✕';
+      font-size: 7pt;
+      font-weight: 900;
+      color: var(--vermelho);
+      flex-shrink: 0;
+    }
+
+    .obj-r {
+      padding: 3mm 4mm 3mm 9mm;
+      font-size: 8.5pt;
+      color: var(--cinza-medio);
+      line-height: 1.65;
+    }
+
+    /* ===================================================
+       PÁGINA FINAL
+    =================================================== */
+    .final-hero {
+      background: var(--verde);
+      border-radius: 12px;
+      padding: 10mm 12mm;
+      text-align: center;
+      margin-bottom: 6mm;
+    }
+
+    .final-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 22pt;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 4mm;
+    }
+
+    .final-hero h2 em {
+      font-style: normal;
+      color: var(--dourado-claro);
+    }
+
+    .final-hero p {
+      font-size: 10pt;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.75;
+      max-width: 140mm;
+      margin: 0 auto;
+    }
+
+    .aviso-legal {
+      font-size: 7pt;
+      color: var(--cinza-claro);
+      line-height: 1.6;
+      text-align: center;
+      border-top: 1px solid var(--borda);
+      padding-top: 4mm;
+      margin-top: auto;
+    }
+
+    /* ===================================================
+       PRINT — esconde sombra de fundo
+    =================================================== */
+    @media print {
+      body { background: none; }
+      .page { margin: 0; box-shadow: none; }
+    }
+
+    /* ===================================================
+       QUOTE
+    =================================================== */
+    .quote-lateral {
+      border-left: 4px solid var(--verde);
+      padding: 3mm 5mm;
+      background: var(--verde-suave);
+      border-radius: 0 6px 6px 0;
+      margin: 5mm 0;
+    }
+
+    .quote-lateral p {
+      font-size: 9.5pt;
+      font-style: italic;
+      color: var(--cinza-escuro);
+      line-height: 1.7;
+    }
+
+    .quote-lateral .autor {
+      font-style: normal;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 7.5pt;
+      color: var(--verde);
+      margin-top: 2mm;
+    }
+
+    /* ===================================================
+       PRINT CTA BOX
+    =================================================== */
+    .cta-box {
+      background: var(--cinza-bg);
+      border: 2px solid var(--verde);
+      border-radius: 10px;
+      padding: 6mm 8mm;
+      text-align: center;
+      margin: 5mm 0;
+    }
+
+    .cta-box h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 12pt;
+      color: var(--verde);
+      text-transform: uppercase;
+      margin-bottom: 3mm;
+    }
+
+    .cta-box p {
+      font-size: 9.5pt;
+      color: var(--cinza-medio);
+      line-height: 1.7;
+    }
+
+    /* ===================================================
+       COLUNA DUPLA
+    =================================================== */
+    .cols-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+  PÁGINA 1 — CAPA
+============================================================ -->
+<div class="page">
+  <div class="capa">
+
+    <div class="capa-topo">
+      <div>
+        <div class="capa-logo-nome">🌿 Instituto Nutri-Health</div>
+        <div class="capa-logo-sub">Saúde Sexual Masculina</div>
+      </div>
+      <div class="capa-ano">Edição 2025</div>
+    </div>
+
+    <div class="capa-body">
+      <div class="capa-badge">Catálogo Informativo — Uso Exclusivo</div>
+
+      <h1>
+        A <em>verdade</em> sobre<br />
+        ejaculação precoce<br />
+        e disfunção erétil<br />
+        que ninguém te contou
+      </h1>
+
+      <div class="capa-linha"></div>
+
+      <p class="capa-sub">
+        Informações baseadas em evidências e nos resultados reais de
+        mais de 96 mil homens que recuperaram sua saúde sexual —
+        sem medicamentos de uso contínuo e sem efeitos colaterais graves.
+      </p>
+
+      <div class="capa-stats">
+        <div class="capa-stat">
+          <div class="cs-num">96.412</div>
+          <div class="cs-label">Homens tratados</div>
+        </div>
+        <div class="capa-stat">
+          <div class="cs-num">97%</div>
+          <div class="cs-label">Taxa de melhora</div>
+        </div>
+        <div class="capa-stat">
+          <div class="cs-num">8 anos</div>
+          <div class="cs-label">De atuação</div>
+        </div>
+        <div class="capa-stat">
+          <div class="cs-num">4,9★</div>
+          <div class="cs-label">Avaliação média</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="capa-rodape">
+      <span class="capa-rodape-txt">Instituto Nutri-Health — Saúde Sexual Masculina — Documento informativo</span>
+      <span class="capa-rodape-numero">1</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 2 — O PROBLEMA E SUA GRAVIDADE
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">O Problema</div>
+    </div>
+
+    <div class="section-tag">A realidade que afeta milhões</div>
+    <h2 class="titulo">
+      Um problema <span class="vermelho">sério</span><br />
+      tratado como tabu
+    </h2>
+    <div class="divider"></div>
+
+    <p class="texto-corpo" style="margin-bottom:5mm;">
+      A ejaculação precoce e a disfunção erétil são duas das condições mais comuns da saúde masculina —
+      e duas das menos faladas. A vergonha impede que homens busquem ajuda, o que agrava o quadro
+      progressivamente. O silêncio, neste caso, é o maior inimigo.
+    </p>
+
+    <div class="box-verde">
+      <p>
+        Segundo a <strong>Sociedade Brasileira de Urologia</strong>, a ejaculação precoce afeta
+        cerca de <strong>30% dos homens brasileiros</strong> — mais de <strong>20 milhões de pessoas</strong>.
+        Já a disfunção erétil atinge <strong>1 em cada 2 homens acima dos 40 anos</strong>,
+        sendo uma das condições mais subdiagnosticadas da medicina masculina.
+      </p>
+    </div>
+
+    <p class="section-tag" style="margin-top:5mm;">Como isso destrói a vida do homem</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="ico">💔</div>
+        <h4>Relacionamento em colapso</h4>
+        <p>A intimidade deteriora, a distância aumenta e o homem começa a evitar o sexo para não se sentir humilhado.</p>
+      </div>
+      <div class="pain-card">
+        <div class="ico">🧠</div>
+        <h4>Ansiedade e depressão</h4>
+        <p>O ciclo é cruel: a falha gera ansiedade, a ansiedade provoca mais falhas. Evolui para depressão em até 68% dos casos sem tratamento.</p>
+      </div>
+      <div class="pain-card">
+        <div class="ico">🪞</div>
+        <h4>Autoestima destruída</h4>
+        <p>O homem para de se sentir homem. Compara-se, envergonha-se, acredita que "nunca mais vai ser como antes".</p>
+      </div>
+      <div class="pain-card">
+        <div class="ico">😶</div>
+        <h4>Isolamento social</h4>
+        <p>Por vergonha, evita conversas sobre o assunto, foge de oportunidades românticas e deixa de viver experiências prazerosas.</p>
+      </div>
+      <div class="pain-card">
+        <div class="ico">💊</div>
+        <h4>Dependência de remédios</h4>
+        <p>Muitos recorrem a medicamentos que mascaram o sintoma, nunca tratando a causa — gerando dependência química e efeitos colaterais graves.</p>
+      </div>
+      <div class="pain-card">
+        <div class="ico">⏰</div>
+        <h4>Problema que só piora</h4>
+        <p>Sem tratamento adequado, o quadro evolui. O que hoje é uma falha eventual, amanhã pode se tornar incapacidade permanente.</p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="pf-text">Instituto Nutri-Health — Documento informativo exclusivo — 2025</div>
+      <div class="pf-num">2</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 3 — DADOS E FATOS
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">Dados e Evidências</div>
+    </div>
+
+    <div class="section-tag">O que a medicina confirma</div>
+    <h2 class="titulo">
+      Os dados que <span class="verde">provam</span><br />
+      a gravidade do problema
+    </h2>
+    <div class="divider"></div>
+
+    <div class="cols-2">
+      <div>
+        <p class="texto-corpo" style="margin-bottom:4mm;">
+          Menos de <strong>15% dos homens</strong> que sofrem com disfunção erétil procuram ajuda médica.
+          O motivo principal é a vergonha. E essa vergonha tem um preço alto.
+        </p>
+
+        <ul class="fact-list">
+          <li>Homens que não tratam a disfunção erétil têm <strong>3x mais chances</strong> de desenvolver depressão clínica nos próximos 5 anos.</li>
+          <li>A ejaculação precoce <strong>não é exclusiva de homens jovens</strong> — afeta todas as faixas etárias e tem causas físicas identificáveis.</li>
+          <li>O estresse, a má alimentação e os <strong>desequilíbrios hormonais</strong> são os principais aceleradores do problema.</li>
+          <li>A maioria das abordagens convencionais trata apenas o <strong>sintoma</strong>, nunca a causa — por isso as recaídas são tão comuns.</li>
+          <li>Quando a causa raiz é tratada, os resultados são duradouros e a <strong>dependência de medicamentos cessa</strong> completamente.</li>
+          <li>Homens com disfunção erétil não tratada relatam <strong>queda de até 60%</strong> na qualidade de vida geral.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="quote-lateral">
+          <p>
+            "A disfunção erétil e a ejaculação precoce são sinais de alerta que o corpo emite sobre desequilíbrios mais profundos.
+            Ignorá-los não os faz desaparecer — os agrava. Tratá-los pela raiz devolve ao homem não apenas a função sexual,
+            mas a saúde integral."
+          </p>
+          <div class="autor">— Dr. Henrique Moraes, Especialista em Saúde Masculina</div>
+        </div>
+
+        <div class="box-cinza" style="margin-top:4mm;">
+          <p class="section-tag" style="margin-bottom:2mm;">Por que os tratamentos comuns falham</p>
+          <p style="font-size:8.5pt; color:var(--cinza-medio); line-height:1.7;">
+            A medicina convencional foca no sintoma: medicamentos para induzir ereção ou retardar a ejaculação.
+            Mas nenhuma dessas abordagens investiga por que o corpo está falhando.
+            Causas hormonais, circulatórias e nutricionais são ignoradas —
+            e por isso, quando o medicamento para, o problema volta. Às vezes, pior do que antes.
+          </p>
+        </div>
+
+        <div class="stats-row" style="margin-top:4mm;">
+          <div class="stat-item">
+            <div class="si-num">30%</div>
+            <div class="si-label">Dos homens brasileiros</div>
+          </div>
+          <div class="stat-item">
+            <div class="si-num">1 em 2</div>
+            <div class="si-label">Após os 40 anos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="pf-text">Instituto Nutri-Health — Documento informativo exclusivo — 2025</div>
+      <div class="pf-num">3</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 4 — RESULTADOS E ABORDAGEM
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">Nossa Abordagem</div>
+    </div>
+
+    <div class="section-tag">8 anos de resultados documentados</div>
+    <h2 class="titulo">
+      Como tratamos<br />
+      a <span class="verde">causa real</span> do problema
+    </h2>
+    <div class="divider"></div>
+
+    <div class="mega-stat-box">
+      <div class="mega-num"><span>96.412</span></div>
+      <div class="mega-label">Homens que recuperaram a vida sexual</div>
+      <div class="mega-sub">Resultado documentado — Instituto Nutri-Health, junho de 2025</div>
+    </div>
+
+    <div class="pilares-grid">
+      <div class="pilar-card">
+        <div class="pilar-ico">🎯</div>
+        <h4>Tratamento da Causa Raiz</h4>
+        <p>Identificamos os desequilíbrios hormonais, circulatórios e nutricionais que estão na origem do problema. Sem eles resolvidos, qualquer tratamento é temporário.</p>
+      </div>
+      <div class="pilar-card">
+        <div class="pilar-ico">🌿</div>
+        <h4>Compostos Naturais</h4>
+        <p>Nosso protocolo utiliza compostos naturais de alta biodisponibilidade com eficácia comprovada — sem dependência química e sem mascarar sintomas.</p>
+      </div>
+      <div class="pilar-card">
+        <div class="pilar-ico">⚡</div>
+        <h4>Resultados em Semanas</h4>
+        <p>A maioria dos pacientes relata melhoras perceptíveis já nas primeiras 2 a 4 semanas de tratamento, com evolução progressiva ao longo do tempo.</p>
+      </div>
+      <div class="pilar-card">
+        <div class="pilar-ico">🔒</div>
+        <h4>Resultado Duradouro</h4>
+        <p>Tratamos a causa, não o sintoma. Por isso, os resultados se mantêm no longo prazo, sem necessidade de uso contínuo e sem risco de recaída.</p>
+      </div>
+    </div>
+
+    <div class="stats-row" style="margin-top:5mm;">
+      <div class="stat-item">
+        <div class="si-num">97%</div>
+        <div class="si-label">Taxa de melhora</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">4,9★</div>
+        <div class="si-label">Avaliação média</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">0</div>
+        <div class="si-label">Efeitos graves</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">+40</div>
+        <div class="si-label">Especialistas</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="pf-text">Instituto Nutri-Health — Documento informativo exclusivo — 2025</div>
+      <div class="pf-num">4</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 5 — DEPOIMENTOS (PARTE 1)
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">Depoimentos Verificados</div>
+    </div>
+
+    <div class="section-tag">Evidências reais — homens reais</div>
+    <h2 class="titulo">
+      O que dizem os homens que<br />
+      <span class="verde">já estão do outro lado</span>
+    </h2>
+    <div class="divider"></div>
+
+    <p class="texto-corpo" style="margin-bottom:5mm;">
+      Abaixo você encontra avaliações de pacientes reais que passaram pelo protocolo do Instituto Nutri-Health.
+      Cada depoimento representa uma história de recuperação verificada pela nossa equipe.
+    </p>
+
+    <!-- Depoimento em destaque -->
+    <div class="dep-card" style="border-left: 4px solid var(--verde); margin-bottom:4mm; background: var(--verde-suave);">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-texto">
+        "Passei 4 anos me sentindo um fracasso dentro do casamento. Minha esposa foi incrivelmente paciente,
+        mas eu sabia que estava arruinando tudo. Com o tratamento do Instituto, em 21 dias a diferença já era visível.
+        Hoje completamos 22 anos de casados e nunca estivemos tão bem. Esse tratamento me devolveu meu casamento e minha dignidade."
+      </p>
+      <div class="dep-autor">
+        <div class="dep-avatar" style="background: var(--verde);">RC</div>
+        <div>
+          <div class="dep-nome">Roberto C.</div>
+          <div class="dep-detalhe">62 anos — Curitiba, PR — Comerciante aposentado</div>
+        </div>
+        <div class="dep-verificado">✓ Depoimento verificado</div>
+      </div>
+    </div>
+
+    <div class="deps-grid-2">
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-texto">
+          "Sou médico e fui cético no início. Mas os resultados que vi em mim mesmo me convenceram mais do que qualquer estudo.
+          A ejaculação precoce que me acompanhava desde os 30 anos simplesmente desapareceu após o protocolo.
+          Hoje recomendo para meus próprios pacientes."
+        </p>
+        <div class="dep-autor">
+          <div class="dep-avatar">FM</div>
+          <div>
+            <div class="dep-nome">Dr. Fábio M.</div>
+            <div class="dep-detalhe">55 anos — São Paulo, SP</div>
+          </div>
+          <div class="dep-verificado">✓ Verificado</div>
+        </div>
+      </div>
+
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-texto">
+          "Tenho diabetes e o médico me disse que a disfunção era 'normal'. Aceitei por anos.
+          Quando conheci o Instituto Nutri-Health, descobri que havia um caminho.
+          Hoje, com 67 anos, tenho uma vida sexual que muitos jovens invejam.
+          Não me conformei com o diagnóstico e encontrei a solução."
+        </p>
+        <div class="dep-autor">
+          <div class="dep-avatar">JO</div>
+          <div>
+            <div class="dep-nome">João O.</div>
+            <div class="dep-detalhe">67 anos — Fortaleza, CE</div>
+          </div>
+          <div class="dep-verificado">✓ Verificado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="pf-text">Instituto Nutri-Health — Documento informativo exclusivo — 2025</div>
+      <div class="pf-num">5</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 6 — DEPOIMENTOS (PARTE 2) + VÍDEOS
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">Depoimentos em Vídeo</div>
+    </div>
+
+    <div class="deps-grid-3" style="margin-bottom:5mm; margin-top:0;">
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-texto">
+          "Gastei mais de R$ 8.000 em consultas e remédios nos últimos 3 anos e nada funcionou.
+          Com o protocolo do Instituto, pela primeira vez tratei a causa.
+          Resultado permanente. Não preciso mais depender de nada."
+        </p>
+        <div class="dep-autor">
+          <div class="dep-avatar">MS</div>
+          <div>
+            <div class="dep-nome">Marcos S.</div>
+            <div class="dep-detalhe">49 anos — Porto Alegre, RS</div>
+          </div>
+          <div class="dep-verificado">✓ Verificado</div>
+        </div>
+      </div>
+
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-texto">
+          "Minha namorada quase terminou comigo por causa disso.
+          Tentei o tratamento quase sem esperança. Na terceira semana, ela me perguntou o que tinha acontecido.
+          Hoje vivemos juntos e somos felizes."
+        </p>
+        <div class="dep-autor">
+          <div class="dep-avatar">AL</div>
+          <div>
+            <div class="dep-nome">André L.</div>
+            <div class="dep-detalhe">38 anos — Belo Horizonte, MG</div>
+          </div>
+          <div class="dep-verificado">✓ Verificado</div>
+        </div>
+      </div>
+
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-texto">
+          "Passei por uma separação e achei que o problema era emocional.
+          Fiz terapia por 2 anos, não resolveu. Quando o Instituto identificou a causa física e tratou na raiz,
+          foi como ligar a luz numa sala escura."
+        </p>
+        <div class="dep-autor">
+          <div class="dep-avatar">CP</div>
+          <div>
+            <div class="dep-nome">Carlos P.</div>
+            <div class="dep-detalhe">43 anos — Recife, PE</div>
+          </div>
+          <div class="dep-verificado">✓ Verificado</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO DE VÍDEOS -->
+    <div class="section-tag" style="margin-top:3mm;">Depoimentos em vídeo — resultado comprovado</div>
+    <p class="texto-corpo" style="margin:2mm 0 4mm;">
+      Assista aos depoimentos em vídeo de dois pacientes que passaram pelo protocolo e compartilharam sua experiência:
+    </p>
+
+    <div class="cols-2" style="gap:4mm;">
+      <div style="border: 1px solid var(--borda); border-top: 3px solid var(--verde); border-radius: 8px; overflow: hidden;">
+        <div style="background:#000; display:flex; align-items:center; justify-content:center; height:32mm; position:relative;">
+          <video style="width:100%; height:100%; object-fit:cover; display:block;" controls preload="metadata">
+            <source src="Videos/DPJABA.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div style="padding:3mm 4mm;">
+          <div style="font-family:Montserrat,sans-serif; font-weight:800; font-size:8.5pt; color:var(--verde); text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5mm;">▶ Depoimento Verificado</div>
+          <div style="font-family:Montserrat,sans-serif; font-weight:700; font-size:9pt; margin-bottom:1.5mm;">Jaba, 54 anos — Empresário</div>
+          <p style="font-size:8pt; color:var(--cinza-medio); line-height:1.6;">
+            "Sofri por mais de 6 anos. Tentei tudo. Em menos de 3 semanas já percebi a diferença. Hoje sou outro homem."
+          </p>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--borda); border-top: 3px solid var(--verde); border-radius: 8px; overflow: hidden;">
+        <div style="background:#000; display:flex; align-items:center; justify-content:center; height:32mm; position:relative;">
+          <video style="width:100%; height:100%; object-fit:cover; display:block;" controls preload="metadata">
+            <source src="Videos/DPTHIAGO.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div style="padding:3mm 4mm;">
+          <div style="font-family:Montserrat,sans-serif; font-weight:800; font-size:8.5pt; color:var(--verde); text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5mm;">▶ Depoimento Verificado</div>
+          <div style="font-family:Montserrat,sans-serif; font-weight:700; font-size:9pt; margin-bottom:1.5mm;">Thiago, 47 anos — Engenheiro</div>
+          <p style="font-size:8pt; color:var(--cinza-medio); line-height:1.6;">
+            "O Instituto me mostrou que havia uma causa real e tratável. Resultado: voltei a ter confiança total."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="pf-text">Instituto Nutri-Health — Documento informativo exclusivo — 2025</div>
+      <div class="pf-num">6</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 7 — QUEBRA DE OBJEÇÕES
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">Dúvidas Frequentes</div>
+    </div>
+
+    <div class="section-tag">O que os homens geralmente pensam</div>
+    <h2 class="titulo">
+      As dúvidas mais comuns —<br />
+      e a <span class="verde">resposta honesta</span>
+    </h2>
+    <div class="divider"></div>
+
+    <div class="obj-item">
+      <div class="obj-q">"É coisa da idade, não tem como mudar."</div>
+      <div class="obj-r">
+        Falso. A disfunção erétil e a ejaculação precoce têm causas identificáveis e tratáveis em qualquer faixa etária.
+        Homens acima dos 70 anos encontraram resultados significativos com nosso protocolo. A idade não é sentença — é apenas um dado.
+      </div>
+    </div>
+
+    <div class="obj-item">
+      <div class="obj-q">"Já tentei de tudo e nada funcionou."</div>
+      <div class="obj-r">
+        A maioria dos tratamentos atua no sintoma, não na causa. Quando a raiz do problema é hormonal, circulatória ou nutricional,
+        remédios convencionais dão resultados temporários. Nosso protocolo age onde o problema realmente vive.
+      </div>
+    </div>
+
+    <div class="obj-item">
+      <div class="obj-q">"Tenho vergonha de falar sobre isso."</div>
+      <div class="obj-r">
+        Entendemos. Por isso 68% dos homens que buscam o Instituto nunca haviam falado sobre o assunto nem com o médico.
+        A confidencialidade é absoluta. Guardar segredo sobre o problema é o que o mantém vivo.
+      </div>
+    </div>
+
+    <div class="obj-item">
+      <div class="obj-q">"É psicológico, não é físico."</div>
+      <div class="obj-r">
+        Em muitos casos há um componente psicológico — mas ele quase sempre tem origem em causas físicas não tratadas.
+        A ansiedade de performance surge como consequência da falha física. Quando corrigimos o físico,
+        o psicológico se resolve naturalmente na maioria dos casos.
+      </div>
+    </div>
+
+    <div class="obj-item">
+      <div class="obj-q">"Tenho medo dos efeitos colaterais."</div>
+      <div class="obj-r">
+        Nossa abordagem utiliza compostos naturais com perfil de segurança documentado.
+        Em mais de 96 mil homens tratados, nenhum efeito colateral grave foi reportado.
+        Ao contrário dos medicamentos convencionais, nosso protocolo não gera dependência.
+      </div>
+    </div>
+
+    <div class="obj-item">
+      <div class="obj-q">"Não tenho tempo para um tratamento longo."</div>
+      <div class="obj-r">
+        A maioria dos pacientes relata resultados perceptíveis nas primeiras 2 a 4 semanas.
+        O protocolo foi desenhado para se encaixar na rotina de homens ativos —
+        sem consultas frequentes ou procedimentos invasivos.
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="pf-text">Instituto Nutri-Health — Documento informativo exclusivo — 2025</div>
+      <div class="pf-num">7</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PÁGINA 8 — FECHAMENTO
+============================================================ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="ph-logo">🌿 Instituto Nutri-Health</div>
+      <div class="ph-tag">Sobre o Instituto</div>
+    </div>
+
+    <div class="final-hero">
+      <h2>
+        Mais de <em>8 anos</em> devolvendo<br />
+        aos homens aquilo que<br />
+        é deles por direito
+      </h2>
+      <p>
+        O Instituto Nutri-Health foi fundado com uma missão clara: criar um espaço seguro onde homens
+        pudessem tratar questões de saúde sexual com seriedade, ciência e sem julgamento.
+        Hoje, com mais de 96 mil histórias de recuperação, continuamos com o mesmo propósito —
+        porque cada número representa uma vida real que voltou a ser completa.
+      </p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="si-num">96k+</div>
+        <div class="si-label">Vidas transformadas</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">97%</div>
+        <div class="si-label">Relatam melhora</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">4,9★</div>
+        <div class="si-label">Avaliação média</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">8 anos</div>
+        <div class="si-label">De atuação</div>
+      </div>
+      <div class="stat-item">
+        <div class="si-num">0</div>
+        <div class="si-label">Efeitos graves</div>
+      </div>
+    </div>
+
+    <div class="cta-box" style="margin-top:5mm;">
+      <h3>Este documento foi preparado para você</h3>
+      <p>
+        Se você chegou até aqui, provavelmente reconheceu algo do que foi descrito neste catálogo.
+        Saiba que o que você sente é mais comum do que parece, tem causa identificável
+        e — acima de tudo — tem solução comprovada em mais de 96 mil histórias reais.
+        Você não precisa continuar convivendo com esse problema.
+      </p>
+    </div>
+
+    <div class="aviso-legal">
+      <strong>Aviso importante:</strong> As informações contidas neste catálogo têm caráter exclusivamente informativo e educacional.
+      Os depoimentos apresentados refletem experiências individuais e os resultados podem variar de pessoa para pessoa.
+      Este documento não substitui consulta médica profissional. Consulte sempre um médico habilitado para diagnóstico e tratamento.
+      Instituto Nutri-Health — Todos os direitos reservados — 2025.
+    </div>
+
+    <div class="page-footer" style="margin-top:4mm;">
+      <div class="pf-text">Instituto Nutri-Health — Saúde Sexual Masculina — Ciência, Resultados e Respeito</div>
+      <div class="pf-num">8</div>
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>
